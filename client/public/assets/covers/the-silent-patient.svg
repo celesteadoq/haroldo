@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900" role="img" aria-label="Capa de The Silent Patient">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0f2a30"/><stop offset="1" stop-color="#071317"/></linearGradient>
+<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#050d10" stop-opacity="0"/>
+  <stop offset="1" stop-color="#050d10" stop-opacity="0.85"/>
+</linearGradient>
+<clipPath id="c"><rect width="600" height="900"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+<rect width="600" height="900" fill="url(#bg)"/>
+<g transform="translate(12.7 10) scale(0.958)"><clipPath id="s0"><rect x="0" y="130" width="600" height="62"/></clipPath><g clip-path="url(#s0)" transform="translate(0 0)"><circle cx="300" cy="320" r="190" fill="#1f4e57"/><circle cx="300" cy="320" r="120" fill="#122e35"/></g><clipPath id="s1"><rect x="0" y="192" width="600" height="62"/></clipPath><g clip-path="url(#s1)" transform="translate(-18 0)"><circle cx="300" cy="320" r="190" fill="#1f4e57"/><circle cx="300" cy="320" r="120" fill="#122e35"/></g><clipPath id="s2"><rect x="0" y="254" width="600" height="62"/></clipPath><g clip-path="url(#s2)" transform="translate(12 0)"><circle cx="300" cy="320" r="190" fill="#1f4e57"/><circle cx="300" cy="320" r="120" fill="#122e35"/></g><clipPath id="s3"><rect x="0" y="316" width="600" height="62"/></clipPath><g clip-path="url(#s3)" transform="translate(-8 0)"><circle cx="300" cy="320" r="190" fill="#1f4e57"/><circle cx="300" cy="320" r="120" fill="#122e35"/></g><clipPath id="s4"><rect x="0" y="378" width="600" height="62"/></clipPath><g clip-path="url(#s4)" transform="translate(22 0)"><circle cx="300" cy="320" r="190" fill="#1f4e57"/><circle cx="300" cy="320" r="120" fill="#122e35"/></g><clipPath id="s5"><rect x="0" y="440" width="600" height="62"/></clipPath><g clip-path="url(#s5)" transform="translate(-14 0)"><circle cx="300" cy="320" r="190" fill="#1f4e57"/><circle cx="300" cy="320" r="120" fill="#122e35"/></g><clipPath id="s6"><rect x="0" y="502" width="600" height="62"/></clipPath><g clip-path="url(#s6)" transform="translate(6 0)"><circle cx="300" cy="320" r="190" fill="#1f4e57"/><circle cx="300" cy="320" r="120" fill="#122e35"/></g><rect x="240" y="352" width="120" height="6" rx="3" fill="#f42a48"/><rect x="294" y="40" width="12" height="60" fill="#f42a48"/></g>
+<rect y="435.8399999999999" width="600" height="464.1600000000001" fill="url(#fade)"/>
+<text x="48" y="678.4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="76" letter-spacing="-2.3" fill="#fff">The Silent</text>
+<text x="48" y="760.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="76" letter-spacing="-2.3" fill="#fff">Patient</text>
+<text x="48" y="822" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="24" letter-spacing="1.5" fill="#d1d5db">Alex Michaelides</text>
+</g>
+</svg>

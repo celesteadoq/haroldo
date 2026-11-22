@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900" role="img" aria-label="Capa de Atomic Habits">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a1426"/><stop offset="1" stop-color="#0b0a14"/></linearGradient>
+<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#07070d" stop-opacity="0"/>
+  <stop offset="1" stop-color="#07070d" stop-opacity="0.85"/>
+</linearGradient>
+<clipPath id="c"><rect width="600" height="900"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+<rect width="600" height="900" fill="url(#bg)"/>
+<g transform="translate(46.1 10) scale(0.846)"><g transform="translate(300 330)"><ellipse rx="210" ry="78" transform="rotate(0)" fill="none" stroke="#f43f5e" stroke-width="4" opacity=".9"/><ellipse rx="210" ry="78" transform="rotate(60)" fill="none" stroke="#f43f5e" stroke-width="4" opacity=".9"/><ellipse rx="210" ry="78" transform="rotate(120)" fill="none" stroke="#f43f5e" stroke-width="4" opacity=".9"/><circle r="44" fill="#f42a48"/><circle r="64" fill="none" stroke="#f42a48" stroke-width="2" opacity=".5"/><circle cx="197.3" cy="26.7" r="13" fill="#ffffff"/><circle cx="-124.7" cy="-138.0" r="13" fill="#ffffff"/><circle cx="67.5" cy="39.0" r="13" fill="#ffffff"/></g><rect x="70" y="624" width="46" height="16" rx="4" fill="#f42a48" opacity="0.25"/><rect x="140" y="610" width="46" height="30" rx="4" fill="#f42a48" opacity="0.35"/><rect x="210" y="596" width="46" height="44" rx="4" fill="#f42a48" opacity="0.45"/><rect x="280" y="582" width="46" height="58" rx="4" fill="#f42a48" opacity="0.55"/><rect x="350" y="568" width="46" height="72" rx="4" fill="#f42a48" opacity="0.65"/><rect x="420" y="554" width="46" height="86" rx="4" fill="#f42a48" opacity="0.75"/><rect x="490" y="540" width="46" height="100" rx="4" fill="#f42a48" opacity="0.85"/></g>
+<rect y="435.8399999999999" width="600" height="464.1600000000001" fill="url(#fade)"/>
+<text x="48" y="678.4" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="76" letter-spacing="-2.3" fill="#fff">Atomic</text>
+<text x="48" y="760.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="76" letter-spacing="-2.3" fill="#fff">Habits</text>
+<text x="48" y="822" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="24" letter-spacing="1.5" fill="#d1d5db">James Clear</text>
+</g>
+</svg>

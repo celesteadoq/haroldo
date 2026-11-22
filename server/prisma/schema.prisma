@@ -1,0 +1,460 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+}
+
+enum SubscriptionStatus {
+  ACTIVE
+  TRIALING
+  PENDING
+  PAST_DUE
+  CANCELED
+  EXPIRED
+  SUSPENDED
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+  CANCELED
+}
+
+enum BookAccessTier {
+  FREE
+  BASIC
+  PREMIUM
+}
+
+enum ReadingStatus {
+  WANT_TO_READ
+  READING
+  COMPLETED
+}
+
+enum OfflineBookStatus {
+  PENDING
+  METADATA_CACHED
+  REVOKED
+}
+
+model User {
+  id                 String    @id @default(cuid())
+  name               String
+  email              String    @unique
+  password           String
+  role               UserRole  @default(USER)
+  isBlocked          Boolean   @default(false)
+  trialUsedAt        DateTime?
+  preferredLanguage  String    @default("pt-BR")
+  preferredTheme     String    @default("dark")
+  emailNotifications Boolean   @default(true)
+  createdAt          DateTime  @default(now())
+  updatedAt          DateTime  @updatedAt
+
+  subscriptions       Subscription[]
+  subscriptionLogs    SubscriptionHistory[]
+  favorites           Favorite[]
+  readingProgress     ReadingProgress[]
+  readingHistory      ReadingHistory[]
+  devices             Device[]
+  refreshTokens       RefreshToken[]
+  payments            Payment[]
+  monthlyBookUnlocks  MonthlyBookUnlock[]
+  offlineBooks        OfflineBook[]
+  notifications       Notification[]
+  passwordResetTokens PasswordResetToken[]
+  adminAuditLogs      AdminAuditLog[]
+
+  @@index([role])
+  @@index([isBlocked])
+}
+
+model Plan {
+  id                String   @id @default(cuid())
+  name              String   @unique
+  description       String
+  price             Float
+  maxDevices        Int
+  offlineBookLimit  Int
+  monthlyBookLimit  Int?
+  hasAds            Boolean  @default(false)
+  hasOfflineReading Boolean  @default(false)
+  isActive          Boolean  @default(true)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  subscriptions        Subscription[]        @relation("CurrentPlan")
+  pendingSubscriptions Subscription[]        @relation("PendingPlan")
+  payments             Payment[]
+  subscriptionLogsFrom SubscriptionHistory[] @relation("FromPlan")
+  subscriptionLogsTo   SubscriptionHistory[] @relation("ToPlan")
+}
+
+model Subscription {
+  id                String             @id @default(cuid())
+  userId            String
+  planId            String
+  pendingPlanId     String?
+  status            SubscriptionStatus @default(ACTIVE)
+  isTrial           Boolean            @default(false)
+  startDate         DateTime           @default(now())
+  endDate           DateTime?
+  trialStartDate    DateTime?
+  trialEndDate      DateTime?
+  cancelAtPeriodEnd Boolean            @default(false)
+  canceledAt        DateTime?
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  user        User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  plan        Plan                  @relation("CurrentPlan", fields: [planId], references: [id], onDelete: Restrict)
+  pendingPlan Plan?                 @relation("PendingPlan", fields: [pendingPlanId], references: [id], onDelete: SetNull)
+  payments    Payment[]
+  history     SubscriptionHistory[]
+
+  @@index([userId])
+  @@index([planId])
+  @@index([status])
+}
+
+model SubscriptionHistory {
+  id             String   @id @default(cuid())
+  subscriptionId String
+  userId         String
+  fromPlanId     String?
+  toPlanId       String
+  action         String
+  notes          String?
+  createdAt      DateTime @default(now())
+
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fromPlan     Plan?        @relation("FromPlan", fields: [fromPlanId], references: [id], onDelete: SetNull)
+  toPlan       Plan         @relation("ToPlan", fields: [toPlanId], references: [id], onDelete: Restrict)
+
+  @@index([userId, createdAt])
+  @@index([subscriptionId])
+}
+
+model Payment {
+  id                   String        @id @default(cuid())
+  userId               String
+  subscriptionId       String
+  planId               String?
+  amount               Float
+  status               PaymentStatus @default(PENDING)
+  paymentMethod        String
+  cardBrand            String?
+  cardLast4            String?
+  failureReason        String?
+  idempotencyKey       String?       @unique
+  transactionReference String?       @unique
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subscription Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  plan         Plan?        @relation(fields: [planId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+  @@index([subscriptionId])
+  @@index([status])
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  slug        String   @unique
+  description String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  books BookCategory[]
+}
+
+model Author {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  slug      String   @unique
+  biography String?
+  photoUrl  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  books BookAuthor[]
+}
+
+model Book {
+  id              String         @id @default(cuid())
+  title           String
+  slug            String         @unique
+  subtitle        String?
+  description     String
+  coverUrl        String?
+  bannerUrl       String?
+  isbn            String?
+  publicationYear Int?
+  publisher       String?
+  pageCount       Int?
+  language        String         @default("Inglês")
+  ageRating       String?
+  averageRating   Float          @default(0)
+  ratingCount     Int            @default(0)
+  accessTier      BookAccessTier @default(BASIC)
+  isActive        Boolean        @default(true)
+  isFeatured      Boolean        @default(false)
+  isFreeEligible  Boolean        @default(false)
+  hasFullContent  Boolean        @default(false)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+
+  authors            BookAuthor[]
+  categories         BookCategory[]
+  previewPages       BookPreviewPage[]
+  favorites          Favorite[]
+  readingProgress    ReadingProgress[]
+  readingHistory     ReadingHistory[]
+  monthlyBookUnlocks MonthlyBookUnlock[]
+  offlineBooks       OfflineBook[]
+
+  @@index([title])
+  @@index([isActive, isFeatured])
+  @@index([isFreeEligible])
+  @@index([accessTier])
+}
+
+model BookAuthor {
+  bookId   String
+  authorId String
+
+  book   Book   @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  author Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@id([bookId, authorId])
+  @@index([authorId])
+}
+
+model BookCategory {
+  bookId     String
+  categoryId String
+
+  book     Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@id([bookId, categoryId])
+  @@index([categoryId])
+}
+
+model BookPreviewPage {
+  id           String   @id @default(cuid())
+  bookId       String
+  pageNumber   Int
+  chapterTitle String?
+  eyebrow      String   @default("BIBLIOFLIX / CADERNO DE LEITURA")
+  title        String
+  content      String
+  disclaimer   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([bookId, pageNumber])
+  @@index([bookId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  bookId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId])
+  @@index([bookId])
+}
+
+model ReadingProgress {
+  id                 String        @id @default(cuid())
+  userId             String
+  bookId             String
+  status             ReadingStatus @default(READING)
+  currentPage        Int           @default(1)
+  totalPages         Int           @default(1)
+  progressPercentage Float         @default(0)
+  readingTimeSeconds Int           @default(0)
+  inLibrary          Boolean       @default(true)
+  lastReadAt         DateTime      @default(now())
+  completedAt        DateTime?
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId])
+  @@index([userId, status])
+  @@index([userId, lastReadAt])
+}
+
+model ReadingHistory {
+  id                 String   @id @default(cuid())
+  userId             String
+  bookId             String
+  lastPage           Int      @default(1)
+  totalPages         Int      @default(1)
+  progressPercentage Float    @default(0)
+  readingTimeSeconds Int      @default(0)
+  lastReadAt         DateTime @default(now())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId])
+  @@index([userId, lastReadAt])
+}
+
+model Device {
+  id               String   @id @default(cuid())
+  userId           String
+  deviceIdentifier String
+  deviceName       String
+  userAgent        String?
+  sessionTokenId   String?
+  firstAccessAt    DateTime @default(now())
+  lastActiveAt     DateTime @default(now())
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refreshTokens RefreshToken[]
+
+  @@unique([userId, deviceIdentifier])
+  @@index([userId, isActive])
+}
+
+model RefreshToken {
+  id                String    @id @default(cuid())
+  userId            String
+  deviceId          String
+  tokenHash         String    @unique
+  expiresAt         DateTime
+  revokedAt         DateTime?
+  replacedByTokenId String?
+  createdAt         DateTime  @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  device Device @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([deviceId])
+  @@index([expiresAt])
+}
+
+model MonthlyBookUnlock {
+  id             String   @id @default(cuid())
+  userId         String
+  bookId         String
+  referenceMonth String
+  unlockedAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId, referenceMonth])
+  @@index([userId, referenceMonth])
+}
+
+model OfflineBook {
+  id        String            @id @default(cuid())
+  userId    String
+  bookId    String
+  deviceId  String?
+  status    OfflineBookStatus @default(METADATA_CACHED)
+  syncedAt  DateTime          @default(now())
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  book Book @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, bookId])
+  @@index([userId, status])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  userId    String
+  category  String   @default("SISTEMA")
+  title     String
+  message   String
+  actionUrl String?
+  dedupeKey String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, dedupeKey])
+  @@index([userId, isRead, createdAt])
+}
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model HelpArticle {
+  id           String   @id @default(cuid())
+  category     String
+  question     String
+  answer       String
+  displayOrder Int      @default(0)
+  isActive     Boolean  @default(true)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([category, isActive, displayOrder])
+}
+
+model AdminAuditLog {
+  id          String   @id @default(cuid())
+  adminUserId String
+  action      String
+  entityType  String
+  entityId    String
+  details     String?
+  createdAt   DateTime @default(now())
+
+  adminUser User @relation(fields: [adminUserId], references: [id], onDelete: Restrict)
+
+  @@index([adminUserId, createdAt])
+  @@index([entityType, createdAt])
+  @@index([createdAt])
+}

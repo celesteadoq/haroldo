@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900" role="img" aria-label="Capa de The Seven Husbands of Evelyn Hugo">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a0f1f"/><stop offset="1" stop-color="#12060c"/></linearGradient>
+<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#0c0308" stop-opacity="0"/>
+  <stop offset="1" stop-color="#0c0308" stop-opacity="0.9"/>
+</linearGradient>
+<clipPath id="c"><rect width="600" height="900"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+<rect width="600" height="900" fill="url(#bg)"/>
+<rect x="24" y="24" width="552" height="852" fill="none" stroke="#f9c784" stroke-width="2" opacity=".5"/><g transform="translate(66.5 10) scale(0.778)"><g transform="translate(300 330)"><circle cx="0.0" cy="-150.0" r="104" fill="none" stroke="#f9c784" stroke-width="4" opacity=".92"/><circle cx="117.3" cy="-93.5" r="104" fill="none" stroke="#f43f5e" stroke-width="4" opacity=".92"/><circle cx="146.2" cy="33.4" r="104" fill="none" stroke="#e8a0b4" stroke-width="4" opacity=".92"/><circle cx="65.1" cy="135.1" r="104" fill="none" stroke="#f9c784" stroke-width="4" opacity=".92"/><circle cx="-65.1" cy="135.1" r="104" fill="none" stroke="#f43f5e" stroke-width="4" opacity=".92"/><circle cx="-146.2" cy="33.4" r="104" fill="none" stroke="#e8a0b4" stroke-width="4" opacity=".92"/><circle cx="-117.3" cy="-93.5" r="104" fill="none" stroke="#f9c784" stroke-width="4" opacity=".92"/><circle r="46" fill="#f9c784"/><path d="M0 -30 L9 -9 L31 -9 L13 5 L20 27 L0 14 L-20 27 L-13 5 L-31 -9 L-9 -9 Z" fill="#3a0f1f"/></g></g>
+<rect y="357.0" width="600" height="543.0" fill="url(#fade)"/>
+<text x="48" y="598.8" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="75" letter-spacing="-2.2" fill="#fff">The Seven</text>
+<text x="48" y="679.8" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="75" letter-spacing="-2.2" fill="#fff">Husbands of</text>
+<text x="48" y="760.8" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="75" letter-spacing="-2.2" fill="#fff">Evelyn Hugo</text>
+<text x="48" y="822" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="24" letter-spacing="1.5" fill="#f6d9b0">Taylor Jenkins Reid</text>
+</g>
+</svg>

@@ -1,0 +1,42 @@
+import { Router } from 'express';
+import { accountRoutes } from './account.routes';
+import { adminRoutes } from './admin.routes';
+import { authRoutes } from './auth.routes';
+import { authorRoutes } from './author.routes';
+import { bookRoutes } from './book.routes';
+import { categoryRoutes } from './category.routes';
+import { checkoutRoutes } from './checkout.routes';
+import { favoriteRoutes } from './favorite.routes';
+import { healthRoutes } from './health.routes';
+import { helpRoutes } from './help.routes';
+import { libraryRoutes } from './library.routes';
+import { notificationRoutes } from './notification.routes';
+import { offlineRoutes } from './offline.routes';
+import { paymentRoutes } from './payment.routes';
+import { planRoutes } from './plan.routes';
+import { readingHistoryRoutes } from './readingHistory.routes';
+import { readingProgressRoutes } from './readingProgress.routes';
+import { subscriptionRoutes } from './subscription.routes';
+
+const routes = Router();
+
+routes.use(healthRoutes);
+routes.use('/auth', authRoutes);
+routes.use('/account', accountRoutes);
+routes.use('/books', bookRoutes);
+routes.use('/categories', categoryRoutes);
+routes.use('/authors', authorRoutes);
+routes.use('/favorites', favoriteRoutes);
+routes.use('/library', libraryRoutes);
+routes.use('/reading-history', readingHistoryRoutes);
+routes.use('/reading-progress', readingProgressRoutes);
+routes.use('/plans', planRoutes);
+routes.use('/subscriptions', subscriptionRoutes);
+routes.use('/checkout', checkoutRoutes);
+routes.use('/payments', paymentRoutes);
+routes.use('/offline', offlineRoutes);
+routes.use('/notifications', notificationRoutes);
+routes.use('/help', helpRoutes);
+routes.use('/admin', adminRoutes);
+
+export { routes };

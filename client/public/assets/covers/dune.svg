@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900" role="img" aria-label="Capa de Dune">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a1a14"/><stop offset="0.55" stop-color="#b9552a"/><stop offset="1" stop-color="#f0a35e"/></linearGradient>
+<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#1d0c06" stop-opacity="0"/>
+  <stop offset="1" stop-color="#1d0c06" stop-opacity="0.9"/>
+</linearGradient>
+<clipPath id="c"><rect width="600" height="900"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+<rect width="600" height="900" fill="url(#bg)"/>
+<circle cx="410" cy="230" r="120" fill="#f9c784" opacity=".95"/><circle cx="410" cy="230" r="150" fill="none" stroke="#f9c784" stroke-width="2" opacity=".4"/><circle cx="150" cy="130" r="26" fill="#fde7c3" opacity=".9"/><path d="M0 420 Q75 360 150 420 Q225 360 300 420 Q375 360 450 420 Q525 360 600 420 Q675 360 750 420 L600 900 L0 900 Z" fill="#c8742e"/><path d="M0 500 Q75 420 150 500 Q225 420 300 500 Q375 420 450 500 Q525 420 600 500 Q675 420 750 500 L600 900 L0 900 Z" fill="#a85a24"/><path d="M0 580 Q75 480 150 580 Q225 480 300 580 Q375 480 450 580 Q525 480 600 580 Q675 480 750 580 L600 900 L0 900 Z" fill="#7f3f1a"/><path d="M0 660 Q75 540 150 660 Q225 540 300 660 Q375 540 450 660 Q525 540 600 660 Q675 540 750 660 L600 900 L0 900 Z" fill="#522711"/>
+<rect y="517.92" width="600" height="382.08000000000004" fill="url(#fade)"/>
+<text x="48" y="760.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="76" letter-spacing="-2.3" fill="#fff">Dune</text>
+<text x="48" y="822" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="24" letter-spacing="1.5" fill="#d1d5db">Frank Herbert</text>
+</g>
+</svg>

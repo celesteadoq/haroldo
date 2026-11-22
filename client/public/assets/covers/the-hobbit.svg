@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 900" width="600" height="900" role="img" aria-label="Capa de The Hobbit">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b3a5a"/><stop offset="1" stop-color="#4c8a6a"/></linearGradient>
+<linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+  <stop offset="0" stop-color="#0b1f10" stop-opacity="0"/>
+  <stop offset="1" stop-color="#0b1f10" stop-opacity="0.9"/>
+</linearGradient>
+<clipPath id="c"><rect width="600" height="900"/></clipPath>
+</defs>
+<g clip-path="url(#c)">
+<rect width="600" height="900" fill="url(#bg)"/>
+<path d="M0 560 Q300 330 600 560 L600 900 L0 900 Z" fill="#2f6a35"/><path d="M0 640 Q300 470 600 640 L600 900 L0 900 Z" fill="#245529"/><circle cx="300" cy="500" r="128" fill="#7a4a1d" stroke="#4d2c0f" stroke-width="10"/><circle cx="300" cy="500" r="104" fill="#2f8a43"/><circle cx="300" cy="500" r="80" fill="none" stroke="#1f5e2d" stroke-width="3"/><circle cx="300" cy="500" r="56" fill="none" stroke="#1f5e2d" stroke-width="3"/><circle cx="300" cy="500" r="32" fill="none" stroke="#1f5e2d" stroke-width="3"/><circle cx="300" cy="500" r="18" fill="#f1c445" stroke="#9a7416" stroke-width="3"/><circle cx="450" cy="150" r="64" fill="#fff1c1" opacity=".9"/><path d="M110 120 l6 -18 l6 18 l18 6 l-18 6 l-6 18 l-6 -18 l-18 -6 z" fill="#fff1c1" opacity=".8"/><path d="M200 220 l6 -18 l6 18 l18 6 l-18 6 l-6 18 l-6 -18 l-18 -6 z" fill="#fff1c1" opacity=".8"/><path d="M80 300 l6 -18 l6 18 l18 6 l-18 6 l-6 18 l-6 -18 l-18 -6 z" fill="#fff1c1" opacity=".8"/><path d="M330 90 l6 -18 l6 18 l18 6 l-18 6 l-6 18 l-6 -18 l-18 -6 z" fill="#fff1c1" opacity=".8"/>
+<rect y="517.92" width="600" height="382.08000000000004" fill="url(#fade)"/>
+<text x="48" y="760.5" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="76" letter-spacing="-2.3" fill="#fff">The Hobbit</text>
+<text x="48" y="822" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="24" letter-spacing="1.5" fill="#d1d5db">J. R. R. Tolkien</text>
+</g>
+</svg>

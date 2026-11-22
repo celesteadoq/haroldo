@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: biblioflix
+    runtime: node
+    plan: free
+    buildCommand: npm run build:render
+    startCommand: npm run start:render
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        value: file:./prod.db
+      - key: JWT_SECRET
+        generateValue: true

@@ -9,7 +9,8 @@
     "db:generate": "prisma generate",
     "db:push": "prisma db push",
     "db:seed": "tsx prisma/seed.ts",
-    "db:covers": "tsx scripts/fetchCovers.ts"
+    "db:covers": "tsx scripts/fetchCovers.ts",
+    "start:render": "prisma db push && tsx prisma/seed.ts && (tsx scripts/fetchCovers.ts || true) && node dist/server.js"
   },
   "dependencies": {
     "@prisma/client": "^6.6.0",

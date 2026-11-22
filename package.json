@@ -12,7 +12,9 @@
     "db:generate": "npm --prefix server run db:generate",
     "db:push": "npm --prefix server run db:push",
     "db:seed": "npm --prefix server run db:seed",
-    "db:covers": "npm --prefix server run db:covers"
+    "db:covers": "npm --prefix server run db:covers",
+    "build:render": "npm install --include=dev && npm --prefix client install --include=dev && npm --prefix server install --include=dev && npm run db:generate && npm run build",
+    "start:render": "npm --prefix server run start:render"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"

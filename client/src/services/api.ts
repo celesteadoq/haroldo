@@ -1,7 +1,7 @@
 import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
 import type { ApiErrorResponse, HealthCheckResponse } from '../types/api';
 
-const baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3333/api';
+const baseURL = import.meta.env.VITE_API_URL || (import.meta.env.PROD ? '/api' : 'http://localhost:3333/api');
 
 export interface ApiStructuredError extends Error {
   statusCode?: number;

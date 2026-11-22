@@ -56,4 +56,3 @@ NODE_ENV=production npm --prefix server run start
 - **Capas reais:** com internet, rode `npm run db:covers`. O script busca cada livro na Open Library e grava no banco a URL da capa (`covers.openlibrary.org`); as imagens não são baixadas, o navegador as carrega de lá. Use `npm run db:covers -- --force` para substituir capas já definidas e `npm run db:covers -- --reset` para voltar às ilustrações locais.
 - **Capas locais (fallback):** ilustrações originais em SVG em `client/public/assets/covers/<slug>.svg`. Elas aparecem automaticamente para livros sem capa, mesmo sem rodar o seed de novo. Para usar uma imagem sua, coloque o arquivo nessa pasta e informe `/assets/covers/arquivo.jpg` em `coverUrl` pelo painel admin.
 - O logo e o favicon ficam em `client/public/assets/branding/` e `client/public/favicon.svg`.
-# haroldo

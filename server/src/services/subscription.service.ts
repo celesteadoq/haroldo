@@ -1,4 +1,4 @@
-import { PaymentStatus, SubscriptionStatus } from '@prisma/client';
+import { PaymentStatus, Prisma, SubscriptionStatus } from '@prisma/client';
 import { prisma } from '../config/prisma';
 import { AppError } from '../utils/AppError';
 import { NotificationService } from './notification.service';
@@ -16,6 +16,10 @@ export function getBrasiliaReferenceMonth(date = new Date()): string {
     parts.find((p) => p.type === 'month')?.value ?? String(date.getUTCMonth() + 1).padStart(2, '0');
   return `${year}-${month}`;
 }
+
+type SubscriptionWithPlans = Prisma.SubscriptionGetPayload<{
+  include: { plan: true; pendingPlan: true };
+}>;
 
 export class SubscriptionService {
   constructor(private readonly notificationService = new NotificationService()) {}
@@ -35,7 +39,7 @@ export class SubscriptionService {
     return plan;
   }
 
-  async reconcileUserSubscription(userId: string) {
+  async reconcileUserSubscription(userId: string): Promise<SubscriptionWithPlans | null> {
     const now = new Date();
     const current = await prisma.subscription.findFirst({
       where: {
